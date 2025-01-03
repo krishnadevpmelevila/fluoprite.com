@@ -1148,3 +1148,7 @@ a:focus {
 .products_section .product_card:hover {
   transform: scale(1.05);
 }
+.header_section .navbar-brand img {
+  width: 150px;
+  height: auto;
+}
